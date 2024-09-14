@@ -8,10 +8,10 @@ namespace RealEstateApi.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [ForeignKey("User_Id")]
         public int User_Id { get; set; }
 
         [ForeignKey("User_Id")]
-        public User User { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ContactNo { get; set; }

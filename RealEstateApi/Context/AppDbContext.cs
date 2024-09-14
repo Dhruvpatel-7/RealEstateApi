@@ -19,16 +19,6 @@ namespace RealEstateApi.Context
 
             modelBuilder.Entity<Properties>()
                 .ToTable("properties");
-
-            modelBuilder.Entity<Properties>()
-                .HasOne(p => p.User) 
-                .WithMany()        
-                .HasForeignKey(p => p.User_Id) 
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-
-
         }
     }
 }

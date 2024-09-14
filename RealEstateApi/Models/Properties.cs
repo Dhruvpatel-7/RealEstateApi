@@ -10,7 +10,6 @@ namespace RealEstateApi.Models
         [Required]
         public int User_Id { get; set; }
 
-        // Navigation property for relationship
         [ForeignKey("User_Id")]
         public User User { get; set; }
         public string Name { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateApi.Context;
 
@@ -11,9 +12,11 @@ using RealEstateApi.Context;
 namespace RealEstateApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240914150408_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +65,7 @@ namespace RealEstateApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("User_Id");
-
-                    b.ToTable("properties", (string)null);
+                    b.ToTable("Properties");
                 });
 
             modelBuilder.Entity("RealEstateApi.Models.User", b =>
@@ -102,17 +103,6 @@ namespace RealEstateApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
-                });
-
-            modelBuilder.Entity("RealEstateApi.Models.Properties", b =>
-                {
-                    b.HasOne("RealEstateApi.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

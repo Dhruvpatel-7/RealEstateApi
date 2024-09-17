@@ -11,6 +11,7 @@ namespace RealEstateApi.Models
         [ForeignKey("User_Id")]
         public int User_Id { get; set; }
         public string Name { get; set; }
+        public string Price { get; set; }
         public string Description { get; set; }
         public string ContactNo { get; set; }
         public string PropertySize { get; set; }

@@ -11,6 +11,10 @@ namespace RealEstateApi.Context
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Properties> Properties { get; set; }
+        public DbSet<Favourite> Favourite { get; set; }
+        public DbSet<Subscription> Subscription { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +23,12 @@ namespace RealEstateApi.Context
 
             modelBuilder.Entity<Properties>()
                 .ToTable("properties");
+
+            modelBuilder.Entity<Favourite>()
+                .ToTable("Favourite");
+
+            modelBuilder.Entity<Subscription>()
+                .ToTable("Subscription");
         }
     }
 }

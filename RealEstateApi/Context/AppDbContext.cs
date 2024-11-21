@@ -13,6 +13,11 @@ namespace RealEstateApi.Context
         public DbSet<Properties> Properties { get; set; }
         public DbSet<Favourite> Favourite { get; set; }
         public DbSet<Subscription> Subscription { get; set; }
+        public DbSet<Inquiry> Inquiry { get; set; }
+        public DbSet<Contactus> Contactus { get; set; }
+        public DbSet<Report> Report { get; set; }
+        public DbSet<Gallary> Gallary { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
 
 
 
@@ -29,6 +34,21 @@ namespace RealEstateApi.Context
 
             modelBuilder.Entity<Subscription>()
                 .ToTable("Subscription");
+
+            modelBuilder.Entity<Gallary>()
+                .ToTable("Gallary");
+
+            modelBuilder.Entity<Report>()
+                .ToTable("Report");
+
+            modelBuilder.Entity<Contactus>()
+                .ToTable("Contactus");
+
+            modelBuilder.Entity<Inquiry>()
+                .ToTable("Inquiry");
+
+            modelBuilder.Entity<Feedback>()
+                .ToTable("Feedback");
         }
     }
 }

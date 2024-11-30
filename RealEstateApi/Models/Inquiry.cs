@@ -13,6 +13,6 @@ namespace RealEstateApi.Models
         [Required]
         [ForeignKey("Property_Id")]
         public int Property_Id { get; set; }
-        public int Message { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateApi.Context;
 
@@ -11,9 +12,11 @@ using RealEstateApi.Context;
 namespace RealEstateApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241130104958_add")]
+    partial class add
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,12 +105,10 @@ namespace RealEstateApi.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PropertyId")
+                    b.Property<int>("Property_Id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PropertyId");
 
                     b.ToTable("Gallary", (string)null);
                 });
@@ -265,22 +266,6 @@ namespace RealEstateApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
-                });
-
-            modelBuilder.Entity("RealEstateApi.Models.Gallary", b =>
-                {
-                    b.HasOne("RealEstateApi.Models.Properties", "Property")
-                        .WithMany("Gallary")
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Property");
-                });
-
-            modelBuilder.Entity("RealEstateApi.Models.Properties", b =>
-                {
-                    b.Navigation("Gallary");
                 });
 #pragma warning restore 612, 618
         }

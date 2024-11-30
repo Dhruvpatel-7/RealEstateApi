@@ -10,7 +10,9 @@ namespace RealEstateApi.Models
         public string Img_name { get; set; }
         public string Path { get; set; }
         [Required]
-        [ForeignKey("Property_Id")]
-        public int Property_Id { get; set; }
+        [ForeignKey("PropertyId ")]
+        public int PropertyId { get; set; }
+
+        public Properties Property { get; set; }
     }
 }

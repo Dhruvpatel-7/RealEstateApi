@@ -1,33 +1,42 @@
-using RealEstateApi.Context;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.DependencyInjection;
+using RealEstateApi.Context;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Use Preserve reference handler to handle circular references in the object graph
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddCors(option =>
 {
     option.AddPolicy("MyPolicy", builder =>
     {
         builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
+
+// Register the DbContext with SQL Server connection string
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
 });
 
+// Add authentication for JWT Bearer tokens
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,9 +67,9 @@ app.UseHttpsRedirection();
 app.UseCors("MyPolicy");
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
+// Map controllers to routes
 app.MapControllers();
 
 app.Run();

@@ -20,5 +20,8 @@ namespace RealEstateApi.Models
         public string District { get; set; }
         public string Address { get; set; }
         public string Aminities { get; set; }
+        public string LocationURL { get; set; }
+
+        public ICollection<Gallary> Gallary { get; set; }
     }
 }
